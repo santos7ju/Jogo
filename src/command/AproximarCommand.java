@@ -7,7 +7,6 @@ import jogo.Porta;
 public class AproximarCommand implements Command {
 	String tipo = null;
 	Boolean tipoPorta = false;
-
 	public AproximarCommand(String s) {
 		this.tipo = s;
 	}

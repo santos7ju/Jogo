@@ -11,7 +11,7 @@ public class JogadorSingleton {
 	private static List<Item> itens = new ArrayList<Item>();
 	private static List<Diamante> diamantes = new ArrayList<Diamante>();
 	private static List<Ouro> ouros = new ArrayList<Ouro>();
-	private static String proximoAoItem=null;
+	private static String proximoAoItem="";
 	public static String getProximoAoItem() {
 		return proximoAoItem;
 	}
@@ -78,7 +78,7 @@ public class JogadorSingleton {
 
 	public static void setSalaAtual(Sala salaAtual) {
 		JogadorSingleton.salaAtual = salaAtual;
-		proximoAoItem=null;
+		proximoAoItem="";
 	}
 
 	public static List<Diamante> getDiamantes() {

@@ -27,34 +27,32 @@ public class MoverJogadorCommand implements Command {
 		for (Porta p : JogadorSingleton.getSalaAtual().getPortas()) {
 			if (p.getTipo().compareTo(tipo) == 0) {
 				if (JogadorSingleton.getProximoAoItem().compareTo(tipo) == 0) {
-				if (p.getTrancada() == false) {
-					acaoExecutada = true;
-
-					if (p.getPortaVizinha().compareTo("saida") == 0) {
-						vencerJogo();
-						break;
+					if (p.getTrancada() == false) {
+						acaoExecutada = true;
+						if (p.getPortaVizinha().compareTo("saida") == 0) {
+							vencerJogo();
+							break;
+						}
+						Integer Id = Math.toIntExact(p.getSalaVizinha());
+						Sala salaVizinha = LabirintoSingleton.getConjuntoSalas().get(Id - 1);
+						System.out.println("Movimento realizado da sala " + JogadorSingleton.getSalaAtual().getCodSala()
+								+ " para a sala " + salaVizinha.getCodSala());
+						JogadorSingleton.getSalaAtual().setPresencaJogador(false);
+						JogadorSingleton.setSalaAtual(salaVizinha);
+						JogadorSingleton.getSalaAtual().setPresencaJogador(true);
+						MoverTrollFacade.moverTroll();
+						SaquearJogadorFacade.LancarMachado();
+					} else {
+						System.out.println("Porta está trancada");
 					}
-
-					Integer Id = Math.toIntExact(p.getSalaVizinha());
-					Sala salaVizinha = LabirintoSingleton.getConjuntoSalas().get(Id - 1);
-					System.out.println("Movimento realizado da sala " + JogadorSingleton.getSalaAtual().getCodSala()
-							+ " para a sala " + salaVizinha.getCodSala());
-					JogadorSingleton.getSalaAtual().setPresencaJogador(false);
-					JogadorSingleton.setSalaAtual(salaVizinha);
-					JogadorSingleton.getSalaAtual().setPresencaJogador(true);
-					MoverTrollFacade.moverTroll();
-					SaquearJogadorFacade.LancarMachado();
+					break;
 				} else {
-					System.out.println("Porta está trancada");
+					System.out.println("Aproxime-se");
 				}
-				break;
 			}
-		}
 		}
 		if (acaoExecutada == false)
 			System.out.println("Não foi possível mudar de sala");
-		else {
-		}
 	}
 
 	public void vencerJogo() throws FileNotFoundException, IOException, ParseException {

@@ -27,9 +27,9 @@ public class LabirintoSingleton {
 		return labirinto;
 	}
 
-	public static void criarLabirinto(JSONObject ob) {
+	public static void criarLabirinto(JSONObject data) {
 		System.out.println("Criando Labirinto");
-		lerArquivo(ob);
+		lerArquivo(data);
 		ChaveA a = new ChaveA();
 		getConjuntoSalas().get(0).incluirChave(a);
 		ChaveB b = new ChaveB();
@@ -55,8 +55,8 @@ public class LabirintoSingleton {
 		conjuntoSalas = salas;
 	}
 
-	public static void lerArquivo(JSONObject ob) {
-		JSONArray salas = (JSONArray) ob.get("salas");
+	public static void lerArquivo(JSONObject data) {
+		JSONArray salas = (JSONArray) data.get("salas");
 		for (int i = 0; i < 20; i++) {
 			List<Porta> portas = new ArrayList<Porta>();
 			JSONObject salaArquivo = (JSONObject) salas.get(i);
@@ -84,8 +84,18 @@ public class LabirintoSingleton {
 
 	public static List<Porta> verifcaExistenciaPorta(Boolean existencia, JSONObject p, Porta porta, List<Porta> portas) {
 		if (existencia == true) {
-			Long salaVizinha = (Long) p.get("salaVizinha");
-			String portaVizinha = (String) p.get("portaVizinha");
+			Long salaVizinha = null;
+			String portaVizinha = null;
+			if (Programa.tipoArquivo.compareTo("xml") == 0) {
+				if (p.get("salaVizinha").toString().compareTo("") != 0)
+					salaVizinha = (Long) p.get("salaVizinha");
+				if (p.get("portaVizinha").toString().compareTo("") != 0)
+					portaVizinha = (String) p.get("portaVizinha");
+			} else {
+				salaVizinha = (Long) p.get("salaVizinha");
+				portaVizinha = (String) p.get("portaVizinha");
+
+			}
 			porta.setPortaVizinha(portaVizinha);
 			porta.setSalaVizinha(salaVizinha);
 			portas.add(porta);
@@ -103,6 +113,7 @@ public class LabirintoSingleton {
 	}
 
 	public static void delete() {
+		LabirintoSingleton.getConjuntoSalas().clear();
 		labirinto = null;
 	}
 

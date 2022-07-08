@@ -20,20 +20,23 @@ public class MoverTrollFacade {
 	}
 
 	public static void moverTroll() {
-		Random random = null;
+		Random random = new Random();
 		for (Sala sala : LabirintoSingleton.getConjuntoSalas()) {
 			List<Porta> portas = sala.getPortas();
 			for (Integer i = 0; i < sala.getTrolls().size(); i++) {
 				random = new Random();
 				Integer Id = 0;
 				Id = random.nextInt(portas.size());
-				if (!sala.getTrolls().isEmpty()) {
-					Troll troll = sala.getTrolls().get(i);
+				if (sala.getTrolls().isEmpty()==false) {
+					Troll troll = new Troll(0,sala);
+					troll = sala.getTrolls().get(i);
 					if (Id != troll.getSalaAtual().getCodSala() - 1) {
-						Porta porta = portas.get(Id);
+						Porta porta = new Porta();
+						porta = portas.get(Id);
 						if (porta.getTrancada() == false) {
 							Id = porta.getSalaVizinha().intValue() - 1;
-							Sala salaVizinha = LabirintoSingleton.getConjuntoSalas().get(Id);
+							Sala salaVizinha = new Sala();
+							salaVizinha = LabirintoSingleton.getConjuntoSalas().get(Id);
 							troll.getSalaAtual().entradaDoTroll(troll);
 							troll.setSalaAtual(salaVizinha);
 							sala.removerTroll(troll);

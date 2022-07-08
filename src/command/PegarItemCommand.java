@@ -16,7 +16,7 @@ public class PegarItemCommand implements Command {
 	public void execute(Object[] obj) {
 		Sala sala = JogadorSingleton.getSalaAtual();
 		Boolean achouItem = false;
-		if (JogadorSingleton.getProximoAoItem() != null && JogadorSingleton.getProximoAoItem().compareTo(tipo) == 0) {
+		if (JogadorSingleton.getProximoAoItem().compareTo(tipo) == 0) {
 			if (tipo.compareTo("Diamante") == 0 || tipo.compareTo("Ouro") == 0) {
 				if (sala.getTrolls().size() > 0) {
 					System.out.println("O ouro está protegido");

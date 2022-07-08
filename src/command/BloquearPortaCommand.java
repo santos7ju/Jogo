@@ -11,6 +11,7 @@ public class BloquearPortaCommand implements Command {
 	public BloquearPortaCommand(String s) {
 		this.tipo = s;
 	}
+
 	public void execute(Object[] obj) {
 		boolean acaoRealizada = false;
 		PocaoMagica pM = null;
@@ -19,9 +20,7 @@ public class BloquearPortaCommand implements Command {
 				pM = (PocaoMagica) i;
 				for (Porta K : JogadorSingleton.getSalaAtual().getPortas()) {
 					if (K.getTipo().compareTo(tipo) == 0 && K.getTrancada() == false) {
-						if (JogadorSingleton.getProximoAoItem() != null
-								&& JogadorSingleton.getProximoAoItem().compareTo(tipo) == 0) {
-							System.out.println("Achou");
+						if (JogadorSingleton.getProximoAoItem().compareTo(tipo) == 0) {
 							if (tipo.compareTo("A") == 0) {
 								K.trancar();
 								acaoRealizada = true;

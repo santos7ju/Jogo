@@ -1,9 +1,6 @@
 package command;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import jogo.Chave;
 import jogo.Item;
 import jogo.JogadorSingleton;
 import jogo.Porta;
@@ -20,8 +17,7 @@ public class AbrirPortaCommand implements Command {
 		for (Porta p : (List<Porta>) JogadorSingleton.getSalaAtual().getPortas()) {
 			if (p.getTipo().compareTo(tipo) == 0) {
 				System.out.println();
-				if (JogadorSingleton.getProximoAoItem() != null
-						&& JogadorSingleton.getProximoAoItem().compareTo(tipo) == 0) {
+				if (JogadorSingleton.getProximoAoItem().compareTo(tipo) == 0) {
 					if (p.getTrancada() == false) {
 						System.out.println("Sala já está aberta");
 						abriu = true;
